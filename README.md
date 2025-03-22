@@ -9,13 +9,13 @@ Inspired by [vim-auto-save](https://github.com/vim-scripts/vim-auto-save).
 [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-use { "mogulla3/autosave.nvim" }
+use { "h3pei/autosave.nvim" }
 ```
 
 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug "mogulla3/autosave.nvim"
+Plug "h3pei/autosave.nvim"
 ```
 
 ## Usage
