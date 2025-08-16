@@ -59,16 +59,11 @@ local function disable_autosave()
 end
 
 local function validate_config()
-  -- FIXME: In Neovim 0.11, the current usage of vim.validate() will be deprecated.
-  -- https://neovim.io/doc/user/deprecated.html#deprecated-0.11
-  -- https://neovim.io/doc/user/lua.html#vim.validate()
-  vim.validate({
-    enabled = { config.enabled, "boolean" },
-    silent = { config.silent, "boolean" },
-    autosave_events = { config.autosave_events, "table" },
-    postsave_hook = { config.postsave_hook, { "function" }, true },
-    exclude_filetypes = { config.exclude_filetypes, "table" },
-  })
+  vim.validate("enabled", config.enabled, "boolean")
+  vim.validate("silent", config.silent, "boolean")
+  vim.validate("autosave_events", config.autosave_events, "table")
+  vim.validate("postsave_hook", config.postsave_hook, "function", true)
+  vim.validate("exclude_filetypes", config.exclude_filetypes, "table")
 end
 
 ---@param user_config table
