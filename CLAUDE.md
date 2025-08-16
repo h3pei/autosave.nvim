@@ -31,5 +31,4 @@ require('autosave').setup()
 - 無名バッファはスキップされる
 - 変更されていないファイルは保存されない
 - `vim.cmd("silent! update")` で実際の保存を実行
-- Neovim 0.11でのvim.validate()の非推奨化に対応する必要がある（FIXMEコメントあり）
 - `exclude_filetypes` 設定により特定のファイルタイプで自動保存を無効化可能（oil.nvim等との互換性のため）
