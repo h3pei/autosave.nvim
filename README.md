@@ -37,6 +37,7 @@ require('autosave').setup({
   silent = false,
   autosave_events = { "InsertLeave", "TextChanged", "CursorHold" },
   postsave_hook = nil,
+  exclude_filetypes = {},
 })
 ```
 
@@ -67,6 +68,20 @@ See `:help events` for more information about events.
 Default: `nil`
 
 Specify the process you want to perform after auto save as a lua function.
+
+#### exclude_filetypes (type: table)
+
+Default: `{}`
+
+List of filetypes for which autosave should be disabled.
+
+For example, to disable autosave for oil.nvim buffers:
+
+```lua
+require('autosave').setup({
+  exclude_filetypes = { "oil" },
+})
+```
 
 ### Commands
 

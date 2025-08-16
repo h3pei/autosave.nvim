@@ -5,6 +5,7 @@ local default_config = {
   silent = false,
   autosave_events = { "InsertLeave", "TextChanged", "CursorHold" },
   postsave_hook = nil,
+  exclude_filetypes = {},
 }
 
 local M = {}
@@ -19,6 +20,14 @@ local function autosave()
   local bufname = vim.api.nvim_buf_get_name(bufnr)
   if bufname == "" then
     return
+  end
+
+  -- Skip excluded filetypes
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+  for _, excluded_ft in ipairs(config.exclude_filetypes) do
+    if filetype == excluded_ft then
+      return
+    end
   end
 
   local was_modified = vim.api.nvim_get_option_value("modified", { buf = bufnr })
@@ -58,6 +67,7 @@ local function validate_config()
     silent = { config.silent, "boolean" },
     autosave_events = { config.autosave_events, "table" },
     postsave_hook = { config.postsave_hook, { "function" }, true },
+    exclude_filetypes = { config.exclude_filetypes, "table" },
   })
 end
 
