@@ -6,6 +6,7 @@ local default_config = {
   autosave_events = { "InsertLeave", "TextChanged", "CursorHold" },
   postsave_hook = nil,
   exclude_filetypes = {},
+  exclude_buftypes = {},
 }
 
 local M = {}
@@ -20,6 +21,14 @@ local function autosave()
   local bufname = vim.api.nvim_buf_get_name(bufnr)
   if bufname == "" then
     return
+  end
+
+  -- Skip excluded buftypes
+  local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+  for _, excluded_bt in ipairs(config.exclude_buftypes) do
+    if buftype == excluded_bt then
+      return
+    end
   end
 
   -- Skip excluded filetypes
@@ -64,6 +73,7 @@ local function validate_config()
   vim.validate("autosave_events", config.autosave_events, "table")
   vim.validate("postsave_hook", config.postsave_hook, "function", true)
   vim.validate("exclude_filetypes", config.exclude_filetypes, "table")
+  vim.validate("exclude_buftypes", config.exclude_buftypes, "table")
 end
 
 ---@param user_config table

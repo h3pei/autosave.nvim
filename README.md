@@ -38,6 +38,7 @@ require('autosave').setup({
   autosave_events = { "InsertLeave", "TextChanged", "CursorHold" },
   postsave_hook = nil,
   exclude_filetypes = {},
+  exclude_buftypes = {},
 })
 ```
 
@@ -82,6 +83,22 @@ require('autosave').setup({
   exclude_filetypes = { "oil" },
 })
 ```
+
+#### exclude_buftypes (type: table)
+
+Default: `{}`
+
+List of buffer types for which autosave should be disabled.
+
+For example, to disable autosave for terminal and special buffers:
+
+```lua
+require('autosave').setup({
+  exclude_buftypes = { "nofile", "terminal", "prompt" },
+})
+```
+
+See `:help 'buftype'` for more information about buffer types.
 
 ### Commands
 
